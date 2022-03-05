@@ -1,9 +1,5 @@
 module Klaytn
   class Contract < Client
-    MISSING_ACCOUNT_WALLET = 'Please provide a KAS Account wallet to pay for transactions.'.freeze # created via KAS > Service > Wallet > Account Pool > Create Account Pool > Create Account
-    MISSING_ACCOUNT_POOL_KRN = 'Please provide a KAS Account Pool KRN id to finish linking your KAS Wallet (ex: krn:XXXX:wallet:yyyy...).'.freeze # KAS > Service > Wallet > Account Pool > KRN
-    MISSING_ABI = 'Please provide the contract ABI, an array-like object returned by the compiler.'.freeze
-    FUNCTION_NOT_FOUND = 'Function with definition XXX not found.'.freeze
     BASE_URL = 'https://wallet-api.klaytnapi.com/v2/tx/contract'.freeze
 
     attr_reader :kas_account_wallet_address, :kas_account_pool_krn, :abi, :encoder
@@ -28,7 +24,7 @@ module Klaytn
         submit: submit
       }
 
-      resp = HTTParty.post(BASE_URL + '/deploy', body: body.to_json, headers: headers, basic_auth: basic_auth)
+      resp = HTTParty.post(BASE_URL + '/deploy', body: body.to_json, headers: headers.merge('x-krn' => kas_account_pool_krn), basic_auth: basic_auth)
       JSON.parse(resp.body)
     end
 
@@ -48,7 +44,7 @@ module Klaytn
       built_inputs = found_function[:inputs].map { |i| OpenStruct.new(i) }
 
       body = function_body_builder(built_defintion, built_inputs, params)
-      resp = HTTParty.post(BASE_URL + '/execute', body: body.to_json, headers: headers, basic_auth: basic_auth)
+      resp = HTTParty.post(BASE_URL + '/execute', body: body.to_json, headers: headers.merge('x-krn' => kas_account_pool_krn), basic_auth: basic_auth)
       JSON.parse(resp.body)
     end
 
@@ -60,10 +56,6 @@ module Klaytn
         gas: 8500000, # 'gas' parameter not required, possibly better to exclude
         submit: submit
       }
-    end
-
-    def headers
-      super.merge('x-krn' => kas_account_pool_krn)
     end
   end
 end

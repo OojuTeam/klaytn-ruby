@@ -1,28 +1,18 @@
 module Klaytn
-  class Client
-    INVALID_CLIENT = 'No params provided - please provide a contract address, ABI, KAS credentials, etc'.freeze
-    MISSING_KAS_CREDS = 'KAS credentials missing'.freeze
-    MISSING_CONTRACT = 'Please provide a deployed smart contract address.'.freeze
-
-    attr_accessor :contract_address, :abi
-    attr_reader :chain_id, :headers, :basic_auth
+  class Client < Base
+    attr_reader :contract_address, :chain_id, :headers, :basic_auth
 
     def initialize(opts = {})
       raise INVALID_CLIENT if opts == {}
 
       @contract_address = opts[:contract_address]
-
       @chain_id = setup_chain_id(opts)
-      @headers = setup_headers
+      @headers = Authentication.new.headers(chain_id)
       @basic_auth = setup_basic_auth(opts)
     end
 
     def setup_chain_id(opts)
       opts[:chain_id] || 1001 # default to baobab testnet
-    end
-
-    def setup_headers
-      Authentication.new.headers(chain_id)
     end
 
     def setup_basic_auth(opts)

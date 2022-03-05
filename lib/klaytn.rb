@@ -4,6 +4,7 @@ require 'ethereum.rb'
 
 module Klaytn
   require 'klaytn/authentication'
+  require 'klaytn/base'
   require 'klaytn/client'
   require 'klaytn/contract'
   require 'klaytn/decoder'
