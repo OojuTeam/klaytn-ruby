@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ryan Kulp", "Ooju"]
   spec.email         = ["launch@ooju.xyz"]
 
-  spec.summary       = "Klaytn is a Ruby wrapper for the Klaytn blockchain."
-  spec.description   = "Interact with transactions, smart contracts, and NFTs on the Klaytn blockchain in pure Ruby."
+  spec.summary       = %q{Klaytn is a Ruby wrapper for the Klaytn blockchain.}
+  spec.description   = %q{Interact with transactions, smart contracts, and NFTs on the Klaytn blockchain in pure Ruby.}
   spec.homepage      = "https://github.com/OojuTeam/klaytn-ruby"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
