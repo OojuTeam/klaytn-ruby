@@ -23,7 +23,7 @@ module Klaytn
       body = {
         from: kas_account_wallet_address,
         to: address,
-        value: encoder.encode_uint(amount_in_peb), # '0x0' = 0 KLAY, '0x4563918244f40000' = 5 KLAY
+        value: encoder.encode_integer(amount_in_peb), # '0x0' = 0 KLAY, '0x4563918244f40000' = 5 KLAY
         memo: opts[:memo], # can be a text note; viewable on Klaytn Scope!
         gas: opts[:gas] || 200000, # not required, default is 1,000,000 if excluded
         submit: should_submit?(opts) # create real transaction by default

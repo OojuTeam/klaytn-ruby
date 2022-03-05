@@ -18,7 +18,7 @@ module Klaytn
     end
 
     def encoded_token_id(token_id)
-      encoder.encode_uint(token_id)
+      encoder.encode_integer(token_id)
     end
   end
 end
