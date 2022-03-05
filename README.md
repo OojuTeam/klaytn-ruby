@@ -1,5 +1,5 @@
 # Klaytn Ruby Library
-Interact with transactions, smart contracts, and NFTs on the Klaytn blockchain (https://www.klaytn.com/). Most functions require KAS Console credentials and KLAY tokens (inside a KAS Account Pool wallet) to pay transaction fees.
+Execute transactions and interact with smart contracts, wallets, and NFT tokens on the Klaytn blockchain (https://www.klaytn.com/). Most functions require KAS Console credentials and KLAY tokens (inside a KAS Account Pool wallet) to pay transaction fees. Created by [ooju.xyz](https://ooju.xyz).
 
 ## Installation
 
