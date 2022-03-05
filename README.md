@@ -37,9 +37,10 @@ After installing the gem, run `rspec` to run the test suite. **Important**: you 
 export KAS_ACCESS_KEY=KASxxx
 export KAS_SECRET_ACCESS_KEY=yyy
 export KAS_ACCOUNT_WALLET_ADDRESS=0x0xxx
+export KAS_ACCOUNT_POOL_KRN=krn:ChainID:wallet:xxx
 ```
 
-Without these ENV variables, most tests will fail. Finally, note that the `KAS_ACCOUNT_WALLET_ADDRESS` will be charged 1 `peb` on the Baobab testnet per test suite run. Disable by commenting out the `Klaytn::Transaction` test context.
+Without these local `ENV` variables, most tests will fail.
 
 ## Contributing
 
