@@ -1,6 +1,5 @@
 module Klaytn
   class Encoder
-    # elements in inputs[] arr must be 'dot' accessible, e.g. via OpenStruct
     def encode_function(definition, inputs, params)
       prefix = '0x'
       str = Ethereum::Function.calc_id(definition) # ex: "getEarnout(uint256)"
