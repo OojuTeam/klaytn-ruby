@@ -32,6 +32,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib", "bin"]
 
   spec.add_development_dependency "rspec", "~> 3.9.1"
-  spec.add_dependency "httparty", "~> 0.17.0"
+  spec.add_dependency "httparty", "~> 0.20.0"
   spec.add_dependency "ethereum.rb", "~> 2.5"
 end
