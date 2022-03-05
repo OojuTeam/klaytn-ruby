@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Interact with transactions, smart contracts, and NFTs on the Klaytn blockchain in pure Ruby.}
   spec.homepage      = "https://github.com/OojuTeam/klaytn-ruby"
   spec.license       = "MIT"
-  spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.0.2")
 
   if spec.respond_to?(:metadata)
     spec.metadata['allowed_push_host'] = "https://rubygems.org"
