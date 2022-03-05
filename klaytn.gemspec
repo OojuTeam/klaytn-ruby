@@ -31,7 +31,13 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib", "bin"]
 
+
   spec.add_development_dependency "rspec", "~> 3.9.1"
+
+  spec.add_dependency "activesupport", ">= 4.2"
   spec.add_dependency "httparty", "~> 0.20.0"
-  spec.add_dependency "ethereum.rb", "~> 2.5"
+  spec.add_dependency "keccak", "~> 1.3" # https://github.com/q9f/keccak.rb
+
+  # spec.add_dependency "ethereum.rb", "~> 2.5"
+
 end
