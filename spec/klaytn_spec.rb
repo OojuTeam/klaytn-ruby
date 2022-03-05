@@ -41,7 +41,7 @@ RSpec.describe Klaytn do
 
     it "sends a transaction for 1 PEB" do
       paying_client = Klaytn::Transaction.new(kas_account_wallet_address: ENV['KAS_ACCOUNT_WALLET_ADDRESS'], kas_access_key: ENV['KAS_ACCESS_KEY'], kas_secret_access_key: ENV['KAS_SECRET_ACCESS_KEY'])
-      result = paying_client.send(send_transaction_recipient, 1, { memo: 'test' })
+      result = paying_client.send(send_transaction_recipient, 1, { memo: 'test', submit: false })
       expect(result['value']).to eql('0x1') # 1 peb
       expect(result['input']).to eql('0x74657374') # encoding of string 'test' in memo field
     end
@@ -81,7 +81,7 @@ RSpec.describe Klaytn do
   context 'Klaytn::Token', token_stubs: true do
     it "does not allow instantiation without a smart contract address" do
       expect {
-        Klaytn::Token.new
+        invalid_client
       }.to raise_error(RuntimeError).with_message(Klaytn::Token::MISSING_CONTRACT_MSG)
     end
 
@@ -89,6 +89,20 @@ RSpec.describe Klaytn do
       result = client.get(token_id)
       expect(result['tokenId']).to eql '0x1'
       expect(result['transactionHash']).to eql get_token_response['transactionHash']
+    end
+  end
+
+  context 'Klaytn::Contract', contract_stubs: true do
+    it "does not allow instantiation without a smart contract address" do
+      expect {
+        invalid_client
+      }.to raise_error(RuntimeError).with_message(Klaytn::Contract::MISSING_ACCOUNT_WALLET_MSG)
+    end
+
+    it "deploys a contract" do
+      result = client.deploy(bytecode, submit: false) # avoid unncessary gas fees
+      expect(result['input']).to eql bytecode
+      expect(result['value']).to eql '0x0'
     end
   end
 end

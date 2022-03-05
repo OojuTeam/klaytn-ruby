@@ -1,5 +1,9 @@
 RSpec.shared_examples 'token_stubs', token_stubs: true do
 
+  let(:invalid_client) {
+    Klaytn::Token.new
+  }
+
   let(:client) {
     Klaytn::Token.new(contract_address: contract_address, kas_access_key: ENV['KAS_ACCESS_KEY'], kas_secret_access_key: ENV['KAS_SECRET_ACCESS_KEY'])
   }
