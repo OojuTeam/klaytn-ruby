@@ -7,6 +7,7 @@ module Klaytn
   require 'klaytn/client'
   require 'klaytn/decoder'
   require 'klaytn/encoder'
+  require 'klaytn/token'
   require 'klaytn/transaction'
   require 'klaytn/wallet'
 end
