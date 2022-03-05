@@ -26,9 +26,20 @@ Or install it yourself as:
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Testing
+
+After installing the gem, run `rspec` to run the test suite. **Important**: you must first authenticate with KAS via:
+```
+export KAS_ACCESS_KEY=KASxxx
+export KAS_SECRET_ACCESS_KEY=yyy
+export KAS_ACCOUNT_WALLET_ADDRESS=0x0xxx
+```
+
+Without these ENV variables, most tests will fail. Finally, note that the `KAS_ACCOUNT_WALLET_ADDRESS` will be charged 1 `peb` on the Baobab testnet per test suite run. Disable by commenting out the `Klaytn::Transaction` test context.
 
 ## Contributing
 
