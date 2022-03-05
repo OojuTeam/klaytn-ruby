@@ -1,6 +1,5 @@
 module Klaytn
   class Token < Client
-    MISSING_CONTRACT_MSG = 'Please provide a deployed smart contract address.'.freeze
     BASE_URL = 'https://th-api.klaytnapi.com/v2/contract/nft'.freeze
 
     attr_reader :encoder

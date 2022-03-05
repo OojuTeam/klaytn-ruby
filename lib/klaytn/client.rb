@@ -2,6 +2,7 @@ module Klaytn
   class Client
     INVALID_CLIENT_MSG = 'No params provided - please provide a contract address, ABI, KAS credentials, etc'.freeze
     MISSING_KAS_MSG = 'KAS credentials missing'.freeze
+    MISSING_CONTRACT_MSG = 'Please provide a deployed smart contract address.'.freeze
 
     attr_accessor :contract_address, :abi
     attr_reader :chain_id, :headers, :basic_auth
@@ -10,7 +11,6 @@ module Klaytn
       raise INVALID_CLIENT_MSG if opts == {}
 
       @contract_address = opts[:contract_address]
-      @abi = opts[:abi]
 
       @chain_id = setup_chain_id(opts)
       @headers = setup_headers
