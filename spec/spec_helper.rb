@@ -1,7 +1,7 @@
 require "bundler/setup"
 require "klaytn"
 require "httparty"
-require "ethereum.rb"
+require 'digest/keccak'
 
 Dir['./spec/support/*.rb'].each { |f| require f }
 

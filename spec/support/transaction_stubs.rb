@@ -1,12 +1,4 @@
 RSpec.shared_examples 'transaction_stubs', transaction_stubs: true do
-  before do
-    if ENV['KAS_ACCESS_KEY'].blank? || ENV['KAS_SECRET_ACCESS_KEY'].blank?
-      puts "Add KAS credentials (export KAS_ACCESS_KEY=xxx, export KAS_SECRET_ACCESS_KEY=yyy) to test Klaytn::Transaction examples."
-    elsif ENV['KAS_ACCOUNT_WALLET_ADDRESS'].blank?
-      puts "Add a KAS account pool wallet address (export KAS_ACCOUNT_WALLET_ADDRESS=0x0xxx) to test 'Klaytn::Transaction.new().send' examples."
-    end
-  end
-
   let(:client) {
     Klaytn::Transaction.new(kas_access_key: ENV['KAS_ACCESS_KEY'], kas_secret_access_key: ENV['KAS_SECRET_ACCESS_KEY'], kas_account_wallet_address: ENV['KAS_ACCOUNT_WALLET_ADDRESS'], kas_account_pool_krn: ENV['KAS_ACCOUNT_POOL_KRN'])
   }
