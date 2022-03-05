@@ -14,13 +14,13 @@ RSpec.describe Klaytn do
     it "does now allow empty instantiation" do
       expect {
         Klaytn::Client.new
-      }.to raise_error(RuntimeError).with_message(Klaytn::Client::INVALID_CLIENT)
+      }.to raise_error(RuntimeError).with_message(Klaytn::Base::INVALID_CLIENT)
     end
 
     it "does now allow instantiation without KAS credentials" do
       expect {
         Klaytn::Client.new({chain_id: 1001})
-      }.to raise_error(RuntimeError).with_message(Klaytn::Client::MISSING_KAS_CREDS)
+      }.to raise_error(RuntimeError).with_message(Klaytn::Base::MISSING_KAS_CREDS)
     end
   end
 
@@ -76,7 +76,7 @@ RSpec.describe Klaytn do
     it "does not allow instantiation without a smart contract address" do
       expect {
         invalid_client
-      }.to raise_error(RuntimeError).with_message(Klaytn::Token::MISSING_CONTRACT)
+      }.to raise_error(RuntimeError).with_message(Klaytn::Base::MISSING_CONTRACT)
     end
 
     it "fetches a token" do
@@ -90,13 +90,34 @@ RSpec.describe Klaytn do
     it "does not allow instantiation without a smart contract address" do
       expect {
         invalid_client
-      }.to raise_error(RuntimeError).with_message(Klaytn::Contract::MISSING_ACCOUNT_WALLET)
+      }.to raise_error(RuntimeError).with_message(Klaytn::Base::MISSING_ACCOUNT_WALLET)
     end
 
     it "deploys a contract" do
       result = client.deploy(bytecode, submit: false) # avoid unncessary gas fees
       expect(result['input']).to eql bytecode
       expect(result['value']).to eql '0x0'
+    end
+
+    it "does not find function in contract" do
+      invalid_function = 'removeAddressFromWhitelist'
+      custom_error_msg = Klaytn::Base::FUNCTION_NOT_FOUND.gsub('XXX', invalid_function)
+
+      expect {
+        interactive_client.invoke_function(invalid_function, [address_to_whitelist])
+      }.to raise_error(RuntimeError).with_message(custom_error_msg)
+    end
+
+    # NOTE: if you run the test suite back to back, this can fail due to the previous tx not completing (same nonce):
+    # {"code"=>1065001, "message"=>"failed to send a raw transaction to klaytn node; there is another tx which has the same nonce in the tx pool", "requestId"=>"29c8f0da-eaf9-4cec-9b0a-332396b669e9"}
+    it "interacts with contract" do
+      result = interactive_client.invoke_function('addAddressToWhitelist', [address_to_whitelist])
+
+      if result['message'].include?('there is another tx which has the same nonce')
+        puts "'interacts with contract' example not run -- still awaiting previous transaction completion"
+      else
+        expect(result['to']).to eql(deployed_contract_address)
+      end
     end
   end
 end

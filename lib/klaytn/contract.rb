@@ -21,6 +21,7 @@ module Klaytn
       body = {
         from: kas_account_wallet_address, # must be created inside KAS console > Account Pool, and MUST be capital version from Klaytn Scope!
         input: bytecode,
+        gas: 900000, # needs to be high for deploy to work
         submit: submit
       }
 
@@ -33,7 +34,7 @@ module Klaytn
     # inputs ex: [ OpenStruct.new({ "internalType": "address", "name": "addr", "type": "address" }) ] - array of dot-notation object from ABI
     # params ex: ['0x0xxxx'] - array of arguments accepted by function
 
-    def invoke_function(definition, inputs, params, submit: true)
+    def invoke_function(definition, params)
       raise MISSING_CONTRACT if contract_address.blank?
       raise MISSING_ABI if abi.blank?
 
@@ -48,13 +49,13 @@ module Klaytn
       JSON.parse(resp.body)
     end
 
-    def function_body_builder(definition, inputs, params, submit)
+    def function_body_builder(definition, inputs, params)
       {
         from: kas_account_wallet_address,
         to: contract_address,
         input: encoder.encode_function(definition, inputs, params),
-        gas: 8500000, # 'gas' parameter not required, possibly better to exclude
-        submit: submit
+        # gas: 900000, # better to exclude, otherwise 'insufficient funds' error is common
+        submit: true
       }
     end
   end
