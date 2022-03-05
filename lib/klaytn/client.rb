@@ -1,14 +1,14 @@
 module Klaytn
   class Client
-    INVALID_CLIENT_MSG = 'No params provided - please provide a contract address, ABI, KAS credentials, etc'.freeze
-    MISSING_KAS_MSG = 'KAS credentials missing'.freeze
-    MISSING_CONTRACT_MSG = 'Please provide a deployed smart contract address.'.freeze
+    INVALID_CLIENT = 'No params provided - please provide a contract address, ABI, KAS credentials, etc'.freeze
+    MISSING_KAS_CREDS = 'KAS credentials missing'.freeze
+    MISSING_CONTRACT = 'Please provide a deployed smart contract address.'.freeze
 
     attr_accessor :contract_address, :abi
     attr_reader :chain_id, :headers, :basic_auth
 
     def initialize(opts = {})
-      raise INVALID_CLIENT_MSG if opts == {}
+      raise INVALID_CLIENT if opts == {}
 
       @contract_address = opts[:contract_address]
 
@@ -26,7 +26,7 @@ module Klaytn
     end
 
     def setup_basic_auth(opts)
-      raise MISSING_KAS_MSG unless opts[:kas_access_key].present? && opts[:kas_secret_access_key].present?
+      raise MISSING_KAS_CREDS unless opts[:kas_access_key].present? && opts[:kas_secret_access_key].present?
       Authentication.new.auth_params(opts[:kas_access_key], opts[:kas_secret_access_key])
     end
   end

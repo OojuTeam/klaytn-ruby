@@ -14,13 +14,13 @@ RSpec.describe Klaytn do
     it "does now allow empty instantiation" do
       expect {
         Klaytn::Client.new
-      }.to raise_error(RuntimeError).with_message(Klaytn::Client::INVALID_CLIENT_MSG)
+      }.to raise_error(RuntimeError).with_message(Klaytn::Client::INVALID_CLIENT)
     end
 
     it "does now allow instantiation without KAS credentials" do
       expect {
         Klaytn::Client.new({chain_id: 1001})
-      }.to raise_error(RuntimeError).with_message(Klaytn::Client::MISSING_KAS_MSG)
+      }.to raise_error(RuntimeError).with_message(Klaytn::Client::MISSING_KAS_CREDS)
     end
   end
 
@@ -82,7 +82,7 @@ RSpec.describe Klaytn do
     it "does not allow instantiation without a smart contract address" do
       expect {
         invalid_client
-      }.to raise_error(RuntimeError).with_message(Klaytn::Token::MISSING_CONTRACT_MSG)
+      }.to raise_error(RuntimeError).with_message(Klaytn::Token::MISSING_CONTRACT)
     end
 
     it "fetches a token" do
@@ -96,7 +96,7 @@ RSpec.describe Klaytn do
     it "does not allow instantiation without a smart contract address" do
       expect {
         invalid_client
-      }.to raise_error(RuntimeError).with_message(Klaytn::Contract::MISSING_ACCOUNT_WALLET_MSG)
+      }.to raise_error(RuntimeError).with_message(Klaytn::Contract::MISSING_ACCOUNT_WALLET)
     end
 
     it "deploys a contract" do

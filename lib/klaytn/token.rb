@@ -5,7 +5,7 @@ module Klaytn
     attr_reader :encoder
 
     def initialize(opts = {})
-      raise MISSING_CONTRACT_MSG if opts[:contract_address].blank?
+      raise MISSING_CONTRACT if opts[:contract_address].blank?
 
       @encoder = Encoder.new
       super

@@ -1,14 +1,15 @@
 module Klaytn
   class Contract < Client
-    MISSING_ACCOUNT_WALLET_MSG = 'Please provide a KAS Account wallet to pay for transactions.' # created via KAS > Service > Wallet > Account Pool > Create Account Pool > Create Account
-    MISSING_ACCOUNT_POOL_KRN = 'Please provide a KAS Account Pool KRN id to finish linking your KAS Wallet (ex: krn:XXXX:wallet:yyyy...).' # KAS > Service > Wallet > Account Pool > KRN
-    FUNCTION_NOT_FOUND = 'Function with definition XXX not found.'
+    MISSING_ACCOUNT_WALLET = 'Please provide a KAS Account wallet to pay for transactions.'.freeze # created via KAS > Service > Wallet > Account Pool > Create Account Pool > Create Account
+    MISSING_ACCOUNT_POOL_KRN = 'Please provide a KAS Account Pool KRN id to finish linking your KAS Wallet (ex: krn:XXXX:wallet:yyyy...).'.freeze # KAS > Service > Wallet > Account Pool > KRN
+    MISSING_ABI = 'Please provide the contract ABI, an array-like object returned by the compiler.'.freeze
+    FUNCTION_NOT_FOUND = 'Function with definition XXX not found.'.freeze
     BASE_URL = 'https://wallet-api.klaytnapi.com/v2/tx/contract'.freeze
 
     attr_reader :kas_account_wallet_address, :kas_account_pool_krn, :abi, :encoder
 
     def initialize(opts)
-      raise MISSING_ACCOUNT_WALLET_MSG if opts[:kas_account_wallet_address].blank?
+      raise MISSING_ACCOUNT_WALLET if opts[:kas_account_wallet_address].blank?
       raise MISSING_ACCOUNT_POOL_KRN if opts[:kas_account_pool_krn].blank?
 
       @kas_account_wallet_address = opts[:kas_account_wallet_address]
@@ -37,7 +38,8 @@ module Klaytn
     # params ex: ['0x0xxxx'] - array of arguments accepted by function
 
     def invoke_function(definition, inputs, params, submit: true)
-      raise MISSING_CONTRACT_MSG if contract_address.blank?
+      raise MISSING_CONTRACT if contract_address.blank?
+      raise MISSING_ABI if abi.blank?
 
       found_function = abi.filter {|input| input[:name] == definition }.first
       raise FUNCTION_NOT_FOUND.gsub('XXX', definition) if found_function.nil?
