@@ -1,6 +1,6 @@
 module Klaytn
   class Decoder
-    def decode_uint(value, subtype = "256", start = 0)
+    def decode_uint(value, subtype = "256", start = 0) # ex: 0x4563918244f40000 => 5000000000000000000 (5 KLAY)
       trim(value, start, bitsize(subtype)).hex
     end
 
