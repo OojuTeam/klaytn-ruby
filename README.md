@@ -42,6 +42,11 @@ export KAS_ACCOUNT_POOL_KRN=krn:ChainID:wallet:xxx
 
 Without these local `ENV` variables, most tests will fail.
 
+Sometimes `rspec` doesn't load variables, even if you can `$echo` them. To prevent subtle bugs, run the test suite via:
+```
+KAS_ACCESS_KEY="KASxxx" KAS_SECRET_ACCESS_KEY="yyy" KAS_ACCOUNT_WALLET_ADDRESS="0x0xxx" KAS_ACCOUNT_POOL_KRN="krn:ChainID:wallet:xxx" rake spec
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/OojuTeam/klaytn-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/OojuTeam/klaytn-ruby/blob/master/CODE_OF_CONDUCT.md).
