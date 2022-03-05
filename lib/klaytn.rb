@@ -1,6 +1,8 @@
 require 'klaytn/version'
 require 'httparty'
-require 'ethereum.rb'
+require 'active_support'
+require 'active_support/core_ext'
+require 'digest/keccak'
 
 module Klaytn
   require 'klaytn/authentication'
