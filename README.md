@@ -1,5 +1,5 @@
 # Klaytn Ruby Library
-Execute transactions and interact with smart contracts, wallets, and NFT tokens on the Klaytn blockchain (https://www.klaytn.com/). Most functions require KAS Console credentials and KLAY tokens (inside a KAS Account Pool wallet) to pay transaction fees. Created by [ooju.xyz](https://ooju.xyz).
+Execute transactions and interact with smart contracts, wallets, and NFT tokens on the [Klaytn blockchain](https://www.klaytn.com/). Most functions require KAS Console credentials and KLAY tokens (inside a KAS Account Pool wallet) to pay transaction fees. Created by [ooju.xyz](https://ooju.xyz).
 
 ## Installation
 
@@ -21,7 +21,7 @@ Or install it yourself as:
 This library is modeled off the [KAS Wallet API](https://refs.klaytnapi.com/en/wallet/latest), but is not an exhaustive implementation. Below are the core features.
 
 **Client authentication**
-```
+```rb
 opts = {
   kas_access_key: 'KASxxx',
   kas_secret_access_key: 'yyy',
@@ -32,7 +32,7 @@ opts = {
 ```
 
 **Transactions**
-```
+```rb
 client = Klaytn::Transaction.new(opts)
 
 # fetch a transaction
@@ -43,7 +43,7 @@ result = client.send('0x00E7b604e9493d53749e7b7b9e39F313d9F9890a', 1, { memo: 's
 ```
 
 **Wallets**
-```
+```rb
 client = Klaytn::Wallet.new # no authentication required
 
 # get a wallet
@@ -54,7 +54,7 @@ result = client.get_balance('0x00e7b604e9493d53749e7b7b9e39f313d9f9890a') # => 3
 ```
 
 **Tokens**
-```
+```rb
 # instantiation requires additional params
 opts = opts.merge(contract_address: '0xbceaa2fa50fef79bb5c4b2fc887dbdd3b96130b7')
 client = Klaytn::Token.new(opts)
@@ -64,15 +64,15 @@ result = client.get(1) # => {"tokenId"=>"0x1", "owner"=>"0x58e0cc86..."}
 ```
 
 **Contracts**
-```
+```rb
 # deploy a contract
 client = Klaytn::Contract.new(opts)
-result = client.deploy(bytecode) # => {"from"=>"0x6e1f42c1e..."}
+result = client.deploy('<bytecode>') # => {"from"=>"0x6e1f42c1e..."}
 
-# interact with a contract
+# interact with a deployed contract
 opts = opts.merge(
-  abi: [{...}], # deployed contract ABI
-  contract_address: '0xbceaa2fa50fef79bb5c4b2fc887dbdd3b96130b7' # deployed contract address
+  abi: [{...}],
+  contract_address: '0xbceaa2fa50fef79bb5c4b2fc887dbdd3b96130b7'
 )
 client = Klaytn::Contract.new(opts)
 result = client.invoke_function('addAddressToWhitelist', ['0x00E7b604e9493d53749e7b7b9e39F313d9F9890a']) # => {"from"=>"0x3f71cde4246cb..."}
