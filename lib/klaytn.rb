@@ -1,6 +1,5 @@
-require "klaytn/version"
+require 'klaytn/version'
 
 module Klaytn
-  class Error < StandardError; end
-  # Your code goes here...
+  require 'klaytn/client'
 end

@@ -3,7 +3,9 @@ RSpec.describe Klaytn do
     expect(Klaytn::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "does now allow empty instantiation" do
+    expect {
+      Klaytn::Client.new
+    }.to raise_error(RuntimeError).with_message('No params provided - please provide a contract address, ABI, KAS credentials, etc')
   end
 end
