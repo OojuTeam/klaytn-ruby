@@ -8,4 +8,5 @@ module Klaytn
   require 'klaytn/decoder'
   require 'klaytn/encoder'
   require 'klaytn/transaction'
+  require 'klaytn/wallet'
 end
