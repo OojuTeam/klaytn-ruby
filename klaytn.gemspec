@@ -12,7 +12,11 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
-  # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  if spec.respond_to?(:metadata)
+    spec.metadata['allowed_push_host'] = "https://rubygems.org"
+  else
+    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
+  end
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/OojuTeam/klaytn-ruby"
@@ -28,6 +32,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib", "bin"]
 
   spec.add_development_dependency "rspec", "~> 3.9.1"
-  spec.add_development_dependency "httparty", "~> 0.17.0"
-  spec.add_development_dependency "ethereum.rb", "~> 2.5"
+  spec.add_dependency "httparty", "~> 0.17.0"
+  spec.add_dependency "ethereum.rb", "~> 2.5"
 end
