@@ -6,7 +6,7 @@ RSpec.describe Klaytn do
 
     it "has necessary dependencies" do
       expect(HTTParty::VERSION).not_to be nil
-      expect(Ethereum::VERSION).not_to be nil
+      expect(Digest::Keccak.methods).to include(:hexdigest)
     end
   end
 
