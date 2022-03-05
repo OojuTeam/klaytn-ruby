@@ -34,14 +34,8 @@ RSpec.describe Klaytn do
       expect(result['blockHash']).to eql(get_transaction_response['blockHash'])
     end
 
-    it "cannot send a transaction for 0 KLAY tokens" do
-      result = client.send(send_transaction_recipient, 0)
-      expect(result['message']).to eql(send_empty_transaction_response['message'])
-    end
-
     it "sends a transaction for 1 PEB" do
-      paying_client = Klaytn::Transaction.new(kas_account_wallet_address: ENV['KAS_ACCOUNT_WALLET_ADDRESS'], kas_access_key: ENV['KAS_ACCESS_KEY'], kas_secret_access_key: ENV['KAS_SECRET_ACCESS_KEY'])
-      result = paying_client.send(send_transaction_recipient, 1, { memo: 'test', submit: false })
+      result = client.send(send_transaction_recipient, 1, { memo: 'test', submit: false })
       expect(result['value']).to eql('0x1') # 1 peb
       expect(result['input']).to eql('0x74657374') # encoding of string 'test' in memo field
     end

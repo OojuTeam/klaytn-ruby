@@ -8,7 +8,7 @@ RSpec.shared_examples 'transaction_stubs', transaction_stubs: true do
   end
 
   let(:client) {
-    Klaytn::Transaction.new(kas_access_key: ENV['KAS_ACCESS_KEY'], kas_secret_access_key: ENV['KAS_SECRET_ACCESS_KEY'])
+    Klaytn::Transaction.new(kas_access_key: ENV['KAS_ACCESS_KEY'], kas_secret_access_key: ENV['KAS_SECRET_ACCESS_KEY'], kas_account_wallet_address: ENV['KAS_ACCOUNT_WALLET_ADDRESS'], kas_account_pool_krn: ENV['KAS_ACCOUNT_POOL_KRN'])
   }
 
   let(:get_transaction_hash) { '0x00301b2b1c09ed43d4b59cbcd5610ebfe17a48215e6f6de10693eb368a489baa' }
@@ -18,10 +18,6 @@ RSpec.shared_examples 'transaction_stubs', transaction_stubs: true do
   }
 
   let(:send_transaction_recipient) { '0x00E7b604e9493d53749e7b7b9e39F313d9F9890a' }
-
-  let(:send_empty_transaction_response) {
-    { "code"=>1061608, "message"=>"cannot be empty or zero value; from", "requestId"=>"95f19359-80b6-4da4-91c3-3325ce3185d1" }
-  }
 
   let(:send_valid_transaction_response) {
     {"from"=>"0x6e1f42c1eb314a0f53ca6ae836be077aaeee6cc0", "gas"=>200000, "gasPrice"=>"0xae9f7bcc00", "input"=>"0x74657374", "nonce"=>7, "rlp"=>"0x10f8840785ae9f7bcc0083030d409400e7b604e9493d53749e7b7b9e39f313d9f9890a01946e1f42c1eb314a0f53ca6ae836be077aaeee6cc08474657374f847f8458207f6a097c895e5db65f3146c03f6b0e86f0ccee6e706994f38b3c679e17339ff2a3a9aa0290e29f281f1a4b0b5eb9cc702e1d1f1186c0886fc0c324f2f924763a88d3a96", "signatures"=>[{"R"=>"0x97c895e5db65f3146c03f6b0e86f0ccee6e706994f38b3c679e17339ff2a3a9a", "S"=>"0x290e29f281f1a4b0b5eb9cc702e1d1f1186c0886fc0c324f2f924763a88d3a96", "V"=>"0x7f6"}], "status"=>"Submitted", "to"=>"0x00e7b604e9493d53749e7b7b9e39f313d9f9890a", "transactionHash"=>"0xd81e6e3dced28efb826914d97cd7b269cea206893ace7fd31f482884e0c8cf12", "typeInt"=>16, "value"=>"0x1"}
