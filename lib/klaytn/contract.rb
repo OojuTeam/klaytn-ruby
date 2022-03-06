@@ -34,7 +34,7 @@ module Klaytn
     # inputs ex: [OpenStruct.new({ "internalType": "address", "name": "addr", "type": "address" })] - array of dot-notation object from ABI
     # params ex: ['0x0xxxx'] - array of arguments accepted by function
 
-    def invoke_function(definition, params)
+    def invoke_function(definition, params, gas: 0)
       raise MISSING_CONTRACT if contract_address.blank?
       raise MISSING_ABI if abi.blank?
 
@@ -44,17 +44,17 @@ module Klaytn
       built_defintion = "#{definition}(#{found_function[:inputs].map {|i| i[:type]}.join(',')})"
       built_inputs = found_function[:inputs].map { |i| OpenStruct.new(i) }
 
-      body = function_body_builder(built_defintion, built_inputs, params)
+      body = function_body_builder(built_defintion, built_inputs, params, gas)
       resp = HTTParty.post(BASE_URL + '/execute', body: body.to_json, headers: headers.merge('x-krn' => kas_account_pool_krn), basic_auth: basic_auth)
       JSON.parse(resp.body)
     end
 
-    def function_body_builder(definition, inputs, params)
+    def function_body_builder(definition, inputs, params, gas)
       {
         from: kas_account_wallet_address,
         to: contract_address,
         input: encoder.encode_function(definition, inputs, params),
-        # gas: 900000, # better to exclude, otherwise 'insufficient funds' error is common
+        gas: gas,
         submit: true
       }
     end
