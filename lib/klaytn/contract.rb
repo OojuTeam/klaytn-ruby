@@ -17,11 +17,11 @@ module Klaytn
       super
     end
 
-    def deploy(bytecode, submit: true)
+    def deploy(bytecode, submit: true, gas: 900000)
       body = {
         from: kas_account_wallet_address, # must be created inside KAS console > Account Pool, and MUST be capital version from Klaytn Scope!
         input: bytecode,
-        gas: 900000, # needs to be high for deploy to work
+        gas: gas,
         submit: submit
       }
 
