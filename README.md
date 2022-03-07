@@ -76,6 +76,16 @@ opts = opts.merge(
 )
 client = Klaytn::Contract.new(opts)
 result = client.invoke_function('addAddressToWhitelist', ['0x00E7b604e9493d53749e7b7b9e39F313d9F9890a']) # => {"from"=>"0x3f71cde4246cb..."}
+
+# interact with a contract using encoded inputs
+client = Klaytn::Contract.new(opts)
+result = client.raw_transaction('<hex>') # => {"from"=>"0x3f71cde4246cb..."}
+```
+
+**JSON RPC**
+```rb
+client = Klaytn::JsonRpc.new(opts)
+result = client.invoke_function(method: 'klay_isContractAccount', params: ["0xbceaa2fa50fef79bb5c4b2fc887dbdd3b96130b7", "latest"]) # => {"jsonrpc"=>"2.0", ...}
 ```
 
 ## Development
