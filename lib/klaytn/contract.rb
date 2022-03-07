@@ -29,8 +29,7 @@ module Klaytn
       JSON.parse(resp.body)
     end
 
-    ## DEPRECATE: definition ex: 'addAddressToWhitelist(address)' - string literal Solidity function definition
-    # definition ex: 'addAddressToWhitelist' - string literal Solidity function definition, without parameters/parens
+    # definition ex: 'addAddressToWhitelist' - string literal Solidity function definition, without params/parens
     # inputs ex: [OpenStruct.new({ "internalType": "address", "name": "addr", "type": "address" })] - array of dot-notation object from ABI
     # params ex: ['0x0xxxx'] - array of arguments accepted by function
 
