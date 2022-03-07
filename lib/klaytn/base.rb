@@ -8,5 +8,6 @@ module Klaytn
     MISSING_ACCOUNT_POOL_KRN = 'Please provide a KAS Account Pool KRN id to finish linking your KAS Wallet (ex: krn:XXXX:wallet:yyyy...).'.freeze # KAS > Service > Wallet > Account Pool > KRN
     MISSING_ABI = 'Please provide the contract ABI, an array-like object returned by the compiler.'.freeze
     FUNCTION_NOT_FOUND = 'Function with definition XXX not found.'.freeze
+    MISSING_JSONRPC_METHOD = 'RPC method name required, e.g. klay_blockNumber.'.freeze
   end
 end

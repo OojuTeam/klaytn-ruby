@@ -120,4 +120,20 @@ RSpec.describe Klaytn do
       end
     end
   end
+
+  context 'Klaytn::JsonRpc', json_rpc_stubs: true do
+    it "does not invoking a function without an JSON RPC method" do
+      expect {
+        client.invoke_function(params: [])
+      }.to raise_error(RuntimeError).with_message(Klaytn::Base::MISSING_JSONRPC_METHOD)
+    end
+  end
+
+  it "invokes a JSON RPC function" do
+    result = client.invoke_function(is_contract_params)
+    expect(result).to eql(is_contract_response)
+
+    result = client.invoke_function(is_not_contract_params)
+    expect(result).to eql(is_not_contract_response)
+  end
 end

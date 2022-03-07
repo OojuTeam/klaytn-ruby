@@ -11,6 +11,7 @@ module Klaytn
   require 'klaytn/contract'
   require 'klaytn/decoder'
   require 'klaytn/encoder'
+  require 'klaytn/json_rpc'
   require 'klaytn/token'
   require 'klaytn/transaction'
   require 'klaytn/wallet'
