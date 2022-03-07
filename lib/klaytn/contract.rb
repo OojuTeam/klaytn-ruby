@@ -49,6 +49,19 @@ module Klaytn
       JSON.parse(resp.body)
     end
 
+    def raw_transaction(input_data, gas: 0)
+      raise MISSING_CONTRACT if contract_address.blank?
+      body = {
+        from: kas_account_wallet_address,
+        to: contract_address,
+        input: input_data,
+        gas: gas,
+        submit: true
+      }
+      resp = HTTParty.post(BASE_URL + '/execute', body: body.to_json, headers: headers.merge('x-krn' => kas_account_pool_krn), basic_auth: basic_auth)
+      JSON.parse(resp.body)
+    end
+
     def function_body_builder(definition, inputs, params, gas)
       {
         from: kas_account_wallet_address,
