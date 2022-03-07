@@ -1,5 +1,4 @@
 RSpec.shared_examples 'token_stubs', token_stubs: true do
-
   let(:invalid_client) {
     Klaytn::Token.new
   }

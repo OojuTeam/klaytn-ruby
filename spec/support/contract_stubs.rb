@@ -1,5 +1,4 @@
 RSpec.shared_examples 'contract_stubs', contract_stubs: true do
-
   let(:invalid_client) {
     Klaytn::Contract.new(kas_access_key: ENV['KAS_ACCESS_KEY'], kas_secret_access_key: ENV['KAS_SECRET_ACCESS_KEY'])
   }
